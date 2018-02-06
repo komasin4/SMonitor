@@ -14,9 +14,14 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.demo.model.Result;
+import com.example.demo.model.ResultModel;
+import com.google.gson.Gson;
 
 @Controller
 public class demoController {
@@ -35,12 +40,18 @@ public class demoController {
 		return "test!";
 	}
 	
-	@RequestMapping(value="/request", method=RequestMethod.GET)
-	public @ResponseBody Object requestTest()	{
+	@RequestMapping(value="/request/{item_no}", method=RequestMethod.GET)
+	public @ResponseBody Object requestTest(@PathVariable String item_no)	{
 		
-		String url = "http://polling.finance.naver.com/api/realtime.nhn?query=SERVICE_ITEM:000660";
+		if(item_no == null || item_no.isEmpty())
+			item_no = "000660";
+		
+		//String url = "http://polling.finance.naver.com/api/realtime.nhn?query=SERVICE_ITEM:000660";
+		String url = "http://polling.finance.naver.com/api/realtime.nhn?query=SERVICE_ITEM:" + item_no;
 		String result = new String();
 		StringBuffer sbResult = new StringBuffer();
+		ResultModel resultModel = new ResultModel();
+		Gson gson = new Gson();
 		
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet(url);
@@ -76,12 +87,16 @@ public class demoController {
 			
 			if (resEntity != null) 
 				result = EntityUtils.toString(resEntity,"utf-8");
+			
+			if(result != null && !result.isEmpty())	{
+				resultModel = gson.fromJson(result, ResultModel.class);
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return result;
+		return resultModel;
 	}
 }
