@@ -27,7 +27,7 @@ public class Data {
 	"keps":4184,
 	"dv":600.00000
 	*/
-	private Integer nv;		//현재가
+	private Float nv;		//현재가
 	private String cd;		//종목코드
 	private Integer eps;	//
 	private float bps;
@@ -51,10 +51,10 @@ public class Data {
 	private Integer ll;
 	private Integer keps;
 	private Float dv;
-	public Integer getNv() {
+	public Float getNv() {
 		return nv;
 	}
-	public void setNv(Integer nv) {
+	public void setNv(Float nv) {
 		this.nv = nv;
 	}
 	public String getCd() {
