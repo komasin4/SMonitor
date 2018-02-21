@@ -1,34 +1,22 @@
 package com.example.demo.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+/*
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.model.Result;
-import com.example.demo.model.ResultModel;
-import com.google.gson.Gson;
+import com.example.demo.configuration.DConstants;
 
 @Controller
 public class demoController {
@@ -48,6 +36,17 @@ public class demoController {
 		return "test!";
 	}
 	
+	@RequestMapping(value="/kakao/login", method=RequestMethod.GET)	
+	public String kakaoLogin()	{
+		/*
+		String url = DConstants.AUTH_URL.format(DConstants.CLIENT_ID, DConstants.REDIRECT_URL);
+		return "redirect:" + url;
+		*/
+		return "jsptest";
+	}
+	
+	
+	/*
 	@PostMapping(value="/parse")
 	public @ResponseBody Object parsingTest(@RequestParam String url, @RequestParam String tag)	{
 		
@@ -55,13 +54,12 @@ public class demoController {
 		try {
 			Document doc = Jsoup.connect(url).get();
 			logger.info(doc.title());
-			/*
-			Elements newsHeadlines = doc.select("#mp-itn b a");
-			for (Element headline : newsHeadlines) {
-				logger.info("%s\n\t%s", 
-			    headline.attr("title"), headline.absUrl("href"));
-			}
-			*/
+
+			//Elements newsHeadlines = doc.select("#mp-itn b a");
+			//for (Element headline : newsHeadlines) {
+			//	logger.info("%s\n\t%s", 
+			//    headline.attr("title"), headline.absUrl("href"));
+			//}
 			
 			Elements elements = doc.getElementsMatchingText(tag);
 			
@@ -72,34 +70,34 @@ public class demoController {
 			e.printStackTrace();
 		}
 		
-		/*
-		String result = new String();
-		StringBuffer sbResult = new StringBuffer();
-		
-		HttpClient client = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet(url);
-		
-		try {
-			HttpResponse response = client.execute(request);
+//		String result = new String();
+//		StringBuffer sbResult = new StringBuffer();
+//		
+//		HttpClient client = HttpClientBuilder.create().build();
+//		HttpGet request = new HttpGet(url);
+//		
+//		try {
+//			HttpResponse response = client.execute(request);
+//
+//			System.out.println("Response Code : "
+//			                + response.getStatusLine().getStatusCode());
+//			
+//			HttpEntity resEntity = response.getEntity();
+//			
+//			if (resEntity != null) 
+//				result = EntityUtils.toString(resEntity,"utf-8");
+//			
+//			System.out.println(result);
+//			
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-			System.out.println("Response Code : "
-			                + response.getStatusLine().getStatusCode());
-			
-			HttpEntity resEntity = response.getEntity();
-			
-			if (resEntity != null) 
-				result = EntityUtils.toString(resEntity,"utf-8");
-			
-			System.out.println(result);
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
 		return "parsing test";
 	}
+	*/
 	
 	@RequestMapping(value="/request/item/{item_no}", method=RequestMethod.GET)	
 		public @ResponseBody Object requestItem(@PathVariable String item_no)	{

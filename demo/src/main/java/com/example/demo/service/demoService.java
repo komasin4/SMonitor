@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,7 +23,13 @@ import com.google.gson.Gson;
 public class demoService {
 	private static final Logger logger = LoggerFactory.getLogger(demoService.class);
 	
-	@Scheduled(cron="0/15 * * * * *")
+	private String access_token;
+	private String refresh_token;
+	
+	private Boolean expire_access_token = true;
+	private Boolean expire_refresh_token = true;
+	
+	@Scheduled(cron="0/15 * 9-15 * * 1-5 ")
 	public void batch()	{
 		logger.debug("--------------------------------------------------");
 		
@@ -39,13 +43,15 @@ public class demoService {
 		query = "SERVICE_INDEX:KOSDAQ";
 		printResult((ResultModel) requestDetail(query), true);
 
-		query = "SERVICE_ITEM:001000";
+		query = "SERVICE_ITEM:122630";
+		printResult((ResultModel) requestDetail(query), false);
+
+		query = "SERVICE_ITEM:233740";
 		printResult((ResultModel) requestDetail(query), false);
 }
 	
 	public void printResult(ResultModel resultModel, Boolean bDivid)	{
-		
-		Gson gson = new Gson();
+		//Gson gson = new Gson();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		float divid_unit = 100;
 		
@@ -56,9 +62,10 @@ public class demoService {
 		String cd = resultModel.getResult().getAreas().get(0).getDatas().get(0).getCd();
 		String nm = resultModel.getResult().getAreas().get(0).getDatas().get(0).getNm();
 		Float index = resultModel.getResult().getAreas().get(0).getDatas().get(0).getNv();
+		Float cr = resultModel.getResult().getAreas().get(0).getDatas().get(0).getCr();
 		Date now = new Date(time);
 				
-		logger.info(sf.format(now) + ":" + (nm==null?"INDEX":nm) + "(" + cd + "):" + index/divid_unit);
+		logger.info(sf.format(now) + ":" + (nm==null?"INDEX":nm) + "(" + cd + "):" + index/divid_unit + ":" + cr + "%");
 		
 		//logger.info(gson.toJson(resultModel));
 	}
@@ -72,7 +79,7 @@ public class demoService {
 		//String url = "http://polling.finance.naver.com/api/realtime.nhn?query=SERVICE_ITEM:000660";
 		String url = "http://polling.finance.naver.com/api/realtime.nhn?query=" + query;
 		String result = new String();
-		StringBuffer sbResult = new StringBuffer();
+		//StringBuffer sbResult = new StringBuffer();
 		ResultModel resultModel = new ResultModel();
 		Gson gson = new Gson();
 		
