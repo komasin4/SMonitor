@@ -230,4 +230,9 @@ public class demoController {
 	return demoService.requestDetail(query);
 	
 	}
+	
+	@GetMapping("/welcome")
+	public String welcome()	{
+		return "welcome";
+	}
 }
