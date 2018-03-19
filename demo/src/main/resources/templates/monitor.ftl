@@ -16,6 +16,8 @@
 		
 		<#assign oldGname = "">
 	
+		${getTime}
+	
 		<table border=1">
 		  	<tr align="center">
 			 	<td>종목코드</td>

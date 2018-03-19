@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,10 @@ public class MonitorController {
 		}
 		
 		mav.addObject("displayList", monitorService.getDisplay(itemExtList));
+		
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S"); 
+		
+		mav.addObject("getTime", dt.format(ItemList.getGetTime()));
 
 		mav.setViewName("monitor");
 

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 
 public class Display {
@@ -27,8 +29,6 @@ public class Display {
 	
 	private Integer oncolor = 0;
 
-	
-	
 	public Integer getOncolor() {
 		return oncolor;
 	}

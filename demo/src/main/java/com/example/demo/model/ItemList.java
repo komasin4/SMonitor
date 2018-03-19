@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +15,11 @@ public class ItemList {
 	//public static ItemCurrent[] itemCurrentList;
 	private static List<Item> itemList;
 	private static HashMap<String,Data> priceMap;
+	private static Date getTime;
 	
+	public static Date getGetTime() {
+		return getTime;
+	}
 	public static List<Item> getItemList() {
 		return itemList;
 	}
@@ -26,5 +31,6 @@ public class ItemList {
 	}
 	public static synchronized void setPriceMap(HashMap<String, Data> priceMap) {
 		ItemList.priceMap = priceMap;
+		getTime = new Date();
 	} 
 }
