@@ -8,6 +8,8 @@
 			@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 		</style>
 	
+		<meta http-equiv="refresh" content="30">
+	
 	</head>
 
 	<body>

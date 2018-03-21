@@ -70,7 +70,7 @@ public class MonitorService {
 	*/
 	
 	//@Scheduled(cron="0/15 * 9-15 * * 1-5 ")
-	@Scheduled(cron="0 0/10 9-15 * * 1-5 ")
+	@Scheduled(cron="0 0/1 9-15 * * 1-5 ")
 	public void stockMonitor()	{
 		logger.info("stockMonitor start");
 		itemService.reloadPricemap();
