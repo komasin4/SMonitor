@@ -67,7 +67,7 @@ public class demoService {
 	
 	@Scheduled(cron="0/15 * 9-15 * * 1-5 ")
 	public void batch()	{
-		logger.debug("--------------------------------------------------");
+		logger.debug("------------------------------");
 		
 		//String queryItem = "SERVICE_ITEM:" + item_no;
 		
@@ -153,7 +153,8 @@ public class demoService {
 		Float cr = resultModel.getResult().getAreas().get(0).getDatas().get(0).getCr();
 		Date now = new Date(time);
 				
-		logger.info(sf.format(now) + ":" + (nm==null?"INDEX":nm) + "(" + cd + "):" + (bDivid?index/divid_unit:index) + ":" + cr + "%");
+		//logger.info(sf.format(now) + ":" + (nm==null?"INDEX":nm) + "(" + cd + "):" + (bDivid?index/divid_unit:index) + ":" + cr + "%");
+		logger.info((nm==null?"INDEX":nm) + "(" + cd + "):" + (bDivid?index/divid_unit:index) + ":" + cr + "%");
 		
 		//logger.info(gson.toJson(resultModel));
 	}
