@@ -135,14 +135,16 @@ public class ItemService {
 
 		
 		HashMap<String,Data> priceMap = new HashMap<String,Data>();
-
-		for(Data data:currentIndex.getResult().getAreas().get(0).getDatas())	{
-			priceMap.put(data.getCd(), data);
-		}
 		
-		for(Data data:currentItem.getResult().getAreas().get(0).getDatas())	{
-			priceMap.put(data.getCd(), data);
-		}
+		if(currentIndex.getResult().getAreas().size() > 0)
+			for(Data data:currentIndex.getResult().getAreas().get(0).getDatas())	{
+				priceMap.put(data.getCd(), data);
+			}
+
+		if(currentItem.getResult().getAreas().size() > 0)
+			for(Data data:currentItem.getResult().getAreas().get(0).getDatas())	{
+				priceMap.put(data.getCd(), data);
+			}
 
 		//ItemList.itemCurrentList = new ItemCurrent[priceMap.size()];
 		HashMap<String,Data> newPriceMap = new HashMap<String,Data>();

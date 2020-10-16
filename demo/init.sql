@@ -9,3 +9,10 @@ CREATE TABLE `item` (
   `order` int(11) DEFAULT NULL,
   PRIMARY KEY (`item_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `Monitor`.`group` (
+  `group_no` INT NOT NULL,
+  `group_name` VARCHAR(100) NULL,
+  `order` INT NULL,
+  PRIMARY KEY (`group_no`));
